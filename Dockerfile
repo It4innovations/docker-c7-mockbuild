@@ -7,5 +7,5 @@ RUN yum -y groups install "Development Tools"
 RUN yum -y install wget mock git dos2unix rpmlint
 
 RUN useradd -G mock builder && chmod g+w /etc/mock/*.cfg
-USER builder
-ENV HOME /home/builder
+#USER builder
+#ENV HOME /home/builder
