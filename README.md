@@ -1,2 +1,2 @@
-# docker-c7-mockbuild
-Docker with CentOS 7 and mockbuild
+# docker-c7-speclint
+Docker with CentOS 7 and speclint
