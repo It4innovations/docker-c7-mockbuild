@@ -10,8 +10,11 @@ else
   LIST=$(git diff master...$BRANCH --name-only | sed '/\.spec$/!d')
 fi
 for i in $LIST; do
-  if ! rpmlint $i
-  then
+  RPM_LOCAL=$(rpm -qp --queryformat "%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}" $i)
+  RPM_REMOTE="fail2ban-0.11-2.el7.centos"
+  rpmdev-vercmp $RPM_LOCAL $RPM_REMOTE
+  if [ $? != 11 ]; then
+    echo "Building $RPM_LOCAL is not newer then package in the remote yum repository."
     exit 1
   fi
 done
