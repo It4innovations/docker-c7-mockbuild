@@ -1,16 +1,8 @@
 #!/bin/bash
 
-if ! BRANCH=$(git rev-parse --abbrev-ref HEAD)
-then
-  exit 1
-fi
-if [ "$BRANCH" == "master" ]; then
-  LIST=$(git log -m -1 --name-only --pretty="format:" | sed '/./,$!d' | awk '/^$/{exit} {print $0}' | sed '/\.spec$/!d')
-else
-  LIST=$(git diff master..."$BRANCH" --name-only | sed '/\.spec$/!d')
-fi
-for i in $LIST; do
-  if ! rpmbuild --undefine=_disable_source_fetch -bs "$i"
+for file in "$@"
+do
+  if ! rpmbuild --undefine=_disable_source_fetch -bs "$file"
   then
     exit 1
   fi
