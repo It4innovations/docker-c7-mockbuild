@@ -9,4 +9,4 @@ if [ "$BRANCH" == "master" ]; then
 else
   LIST=$(git diff master..."$BRANCH" --name-only | sed '/\.spec$/!d')
 fi
-echo $LIST
+echo "$LIST"
