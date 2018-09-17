@@ -13,7 +13,7 @@ do
   BASE=${file##*/}
   DIR=${file%$BASE}
   DIRC=${DIR//\//}
-  SOURCEDIR="$REPODIR/$DIRC"
+  SOURCEDIR="$REPODIR/$DIRC/sources"
   if ! rpmbuild --undefine=_disable_source_fetch -bs "$file" --define "_sourcedir ${SOURCEDIR}"
   then
     exit 1
